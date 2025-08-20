@@ -1,0 +1,20 @@
+<h1 class="title-page">Detalhes do Produto</h1>
+<div class="product-detail-container">
+    <div class="left-content">
+        <img class="product-image" [src]="product.image" [alt]="product.title">
+    </div>
+    <div class="right-content">
+        <div class="product-info">
+            <h2 class="product-title">{{product.title}}</h2>
+            <p class="product-description">{{product.description}}</p>
+            <h2 class="product-price">{{product.price | currency:'BRL'}}</h2>
+        </div>
+        <div class="product-actions">
+            <app-btn-counter></app-btn-counter>
+            <div class="btn-container">
+                <app-button class="btn-buyy" [label]="'Compra Agora'"></app-button>
+                <app-button (click)="addToCart(product)" class="btn-add" [label]="'Adicionar ao Carrinho'"></app-button>
+            </div>
+        </div>
+    </div>
+</div>`

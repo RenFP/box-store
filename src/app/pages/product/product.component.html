@@ -1,0 +1,8 @@
+<app-filter></app-filter>
+    <div class="list-container">
+    
+        @for (product of productList(); track product.id) {
+    
+        <app-product-card [productItem]="product" />
+        }
+</div>

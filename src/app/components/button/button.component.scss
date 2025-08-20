@@ -1,0 +1,22 @@
+.btn-buy {
+    background: none;
+    width: 100%;    
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 10px;
+    height: 100%;
+    text-align: center;
+    transition: 200ms;
+    
+
+    box-sizing: border-box;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.btn-buy:hover {
+    opacity: 0.6;
+}

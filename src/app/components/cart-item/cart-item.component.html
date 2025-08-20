@@ -1,0 +1,15 @@
+<div class="cart-item">
+    <div class="item-image">
+        <img class="product-image" [src]="productItem.image" alt="Product Image">
+    </div>
+    <div class="item-details">
+        <h3>{{productItem.title}}</h3>
+        <p>{{productItem.description}}</p>
+        <p>{{productItem.price | currency: 'BRL'}}</p>
+    </div>
+    <div class="product-actions">
+
+        <button class="btn-delete" (click)="onDeletItem.emit($event)"><i class="pi pi-trash" style="font-size: 1.5rem"></i></button>
+        <app-btn-counter></app-btn-counter>
+    </div>
+</div>

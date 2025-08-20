@@ -1,0 +1,29 @@
+<div class="login-container">
+    <div class="left-content">
+        <form [formGroup]="loginForm" class="form-login">
+            <img src="logo.png" alt="box-store logo" class="logo" />
+            <h1>Bem vindo!</h1>
+
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="username" autocomplete="off" />
+                <label for="over_label">Usuário</label>
+            </p-floatlabel>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="password" type="password" autocomplete="off" />
+                <label for="over_label">Senha</label>
+            </p-floatlabel>
+            <div>
+                <div class="check-box">
+                    <p-checkbox inputId="checkBox" name="checkBox" [value]="remenberMe"  />
+                    <label for="checkBox" class="ml-2"> Lembrar-me </label>
+                </div>
+            </div>
+            <button (click)="login()" class="btn-login">Logar</button>
+            <button (click)="getUser()" class="btn-register">Registra-se</button>
+        </form>
+
+    </div>
+    <div class="right-content">
+
+    </div>
+</div>

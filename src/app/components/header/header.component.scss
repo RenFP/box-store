@@ -1,0 +1,51 @@
+.nav-bar {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    padding: 0 80px;
+    overflow: hidden;
+
+}
+
+@media (max-width: 768px) {
+    .nav-bar {
+        padding: 0 20px;
+    }
+}
+
+.nav-logo {
+    flex: 1;
+
+    img {
+        height: 60px;
+        cursor: pointer;
+    }
+}
+
+.nav-category {
+    flex: 5;
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    
+}
+
+.nav-menu {
+
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+
+    .nav-account,
+    .nav-cart {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+}

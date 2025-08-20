@@ -1,0 +1,14 @@
+<div class="card-container">
+    <div class="card-content">
+        <div [routerLink]="['/home/product', productItem.id]" class="img-container">
+            <img class="img-product" [src]="productItem.image" [alt]="productItem.title">
+        </div>
+        <div class="product-content">
+            <h3 class="card-title">{{productItem.title}}</h3>
+        </div>        
+        <div class="btn-container">            
+            <app-button class="btn-buy" [label]="'Adicionar'"></app-button>
+            <div class="card-price">{{productItem.price | currency :'BRL'}}</div>
+        </div>
+    </div>
+</div>

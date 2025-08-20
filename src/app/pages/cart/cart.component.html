@@ -1,0 +1,46 @@
+<div class="cart-page">
+    <div class="title-cart">
+
+        <h1 class="title-page">Seu Carrinho</h1>
+    </div>
+
+    <div class="cart-content">
+        <div class="cart-list">
+            @for(product of products; track product.id) {
+
+            <app-cart-item (onDeletItem)="deleteItem(product.id)" [productItem]="product"></app-cart-item>
+
+            @if(!$last) {
+            <hr class="hr-cart">
+            }
+
+            } @empty{
+            <h2>Seu carrinho está vazio .</h2>
+            }
+
+        </div>
+        <div class="order-container">
+            <h3>Resumo do Pedido</h3>
+            <div class="order-summary">
+                <div class="sumamary-content">
+                    <p>Sub Total</p>
+                    <p>Frete/p>
+                </div>
+                <div class="sumamary-values">
+                    <p>{{totalOrder | currency: 'BRL'}}
+                    <p>
+                    <p>2 | currency</p>
+                </div>
+            </div>
+
+            <hr class="hr-cart">
+
+            <div class="total-order">
+                <h3>Total</h3>
+                <p>{{totalOrder | currency: 'BRL'}}</p>
+            </div>
+            <button>Finalizar Pedido</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,132 @@
+.title-page {
+    padding: 0 50px;
+    font-size: 30px;
+}
+
+@media (max-width: 768px) {
+    .title-page {
+        padding: 0 20px;
+        font-size: 25px;
+    }
+}
+
+.product-detail-container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 0 10%;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+@media (max-width: 768px) {
+    .product-detail-container {
+        padding: 0 20px;
+    }
+}
+
+.left-content {
+    flex: 1 1 400px;
+    height: 600px;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f7f6;
+    border-radius: 10px;
+    padding: 20px;
+    overflow: hidden;
+    max-width: 48%;
+
+    .product-image {
+        height: 90%;
+        width: 100%;
+        object-fit: contain;
+
+
+    }
+
+}
+
+
+.right-content {
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 400px;
+    height: 600px;
+    max-width: 48%;
+
+}
+
+@media (max-width: 768px) {
+    .left-content {
+        height: 300px;
+        max-width: 90%
+    }
+
+    .product-image {
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .right-content {
+        height: auto;
+        max-width: 90%;
+        padding: 0 20px;
+        
+    }
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .product-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+        padding: 0px 2px;
+
+    }
+
+    .product-description {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        padding: 0px 2px;
+    }
+}
+
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        height: 60px;
+
+    }
+
+    .btn-buyy {
+        width: 50%;
+        max-width: 250px;
+        background-color: #fff000;
+        border-radius: 23px;
+
+    }
+
+    .btn-add {
+        width: 50%;
+        max-width: 250px;
+        border: 2px solid #fff000;
+        border-radius: 23px;
+
+    }
+}
