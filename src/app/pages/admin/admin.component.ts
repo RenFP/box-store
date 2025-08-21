@@ -14,13 +14,14 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { ModalComponent } from "../../components/modal/modal.component"
 
 
 
 @Component({
   selector: 'app-admin',
   imports: [TableModule, CommonModule, InputTextModule, TagModule,
-    SelectModule, MultiSelectModule, ButtonModule, IconFieldModule, InputIconModule],
+    SelectModule, MultiSelectModule, ButtonModule, IconFieldModule, InputIconModule, ModalComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
@@ -28,29 +29,19 @@ export class AdminComponent {
   productService = inject(ProductService);
   products: Product[] = [] as Product[];
   selectedProducts!: Product[];
+  searchValue: string | undefined;
+  visible: boolean = false;
+  selectedProduct: Product = {} as Product;
 
-  generateQuantity(): number {
-   
-    return Math.floor(Math.random() * 20);
-  }
-
-  representatives!: Product[];
-
-  statuses!: any[];
-
-  loading: boolean = true;
-
-  activityValues: number[] = [0, 100];
-
-  searchValue: string | undefined; 
 
   ngOnInit() {
+    this.loadProducts();
+  }
+
+  loadProducts() {
     this.productService.getProducts().subscribe((data: Product[]) => {
       this.products = data;
-      this.loading = false;
-      
-    });  
-    
+    });
   }
 
   clear(table: Table) {
@@ -58,5 +49,12 @@ export class AdminComponent {
     this.searchValue = ''
   }
 
+  showDialog(product: Product) {
+    this.visible = !this.visible;
+    this.selectedProduct = product;
+  }
 
+  closeDialog(visibility: boolean) {
+    this.visible = visibility;
+  }
 }

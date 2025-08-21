@@ -1,0 +1,35 @@
+<p-toast />
+<p-confirmdialog />
+<div class="card flex justify-center">
+    <p-dialog header="Editar produto" [modal]="true" (onHide)="closeDialog()" [(visible)]="visible"
+        [style]="{ width: '25rem' }">
+        <p class="">Atualize as informações do Produto.</p>
+
+        <div class="input-group">
+            <label for="username">Título</label>
+            <input pInputText id="title" aria-describedby="title" [(ngModel)]="productData.title" />            
+        </div>
+        <div class="input-group">
+            <label for="username">Categoria</label>
+            <input pInputText id="category" aria-describedby="category" [(ngModel)]="productData.category" />
+        </div>
+        <div class="input-group">
+            <label for="username">Descrição</label>
+            <input pInputText id="description" aria-describedby="description" [(ngModel)]="productData.description" />
+        </div>
+        <div class="input-group">
+            <label for="username">Url Imagem</label>
+            <input pInputText id="urlImage" aria-describedby="urlImage" [(ngModel)]="productData.image" />
+        </div>
+
+
+        <div class="btn-container">
+            <!-- <p-button label="Deletar" severity="danger" (click)="closeDialog()" />
+            <p-button label="Cancelar" severity="secondary" (click)="closeDialog()" />
+            <p-button label="Salvar" (click)="closeDialog()" /> -->
+
+            <p-button (click)="confirmDelete($event)" label="Deletar"  severity="danger" />
+            <p-button (click)="confirmSave($event)" label="Salvar" severity="success"/>
+        </div>
+    </p-dialog>
+</div>

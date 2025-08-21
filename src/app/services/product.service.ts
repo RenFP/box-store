@@ -13,7 +13,15 @@ export class ProductService {
     return this.http.get<Product[]>('https://fakestoreapi.com/products');
   }
 
+  updateProduct(productId: number, product: Product): Observable<Product> {
+    return this.http.put<Product>(`https://fakestoreapi.com/products/${productId}`, product);
+  }
+
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`https://fakestoreapi.com/products/${id}`);
+  }
+
+  deleteProduct(productId: number): Observable<Product> {
+    return this.http.delete<Product>(`https://fakestoreapi.com/products/${productId}`);
   }
 }

@@ -19,7 +19,8 @@ export class ProductComponent {
 
   ngOnInit() {
     this.productService.getProducts().subscribe((data) => {
-      this.productList.set(data);      
+      this.productList.set(data);   
+      console.log(this.productList())   
     });
 
   }

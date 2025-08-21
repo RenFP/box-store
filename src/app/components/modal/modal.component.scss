@@ -1,0 +1,11 @@
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 10px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-evenly;
+}

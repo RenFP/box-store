@@ -5,9 +5,11 @@
         </div>
         <div class="product-content">
             <h3 class="card-title">{{productItem.title}}</h3>
-        </div>        
-        <div class="btn-container">            
-            <div> RATING </div>
+        </div>
+        <div class="act-container">
+            <div class="card flex justify-center">
+                <p-rating [(ngModel)]="productItem.rating.rate" [readonly]="true" />
+            </div>
             <div class="card-price">{{productItem.price | currency :'BRL'}}</div>
         </div>
     </div>

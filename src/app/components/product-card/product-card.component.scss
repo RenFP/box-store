@@ -2,8 +2,13 @@
     width: 350px;
     height: 420px;
     overflow: hidden;
+    border-radius: 10px;
+   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;  
+}
 
-    
+.card-container:hover{
+    // box-shadow: #fff000 0px 1px 3px, #fff000 0px 1px 2px;  
+    box-shadow: #ffee003a 0px 10px 30px -5px;
 }
 
 .card-content {
@@ -36,7 +41,7 @@
     }
 }
 .img-container:hover {    
-    scale: 1.08;
+    scale: 1.03;
     opacity: 0.8;
 }
 
@@ -51,7 +56,7 @@
     .card-title {
         flex: 2;          
         font-size: 0.9rem;
-        font-weight: 500;          
+        font-weight:600;          
         overflow: hidden;
         text-overflow: clip;        
         white-space: wrap;
@@ -65,7 +70,7 @@
     }
 }
 
-.btn-container {
+.act-container {
     width: 95%;
     height: 10%;
     display: flex;

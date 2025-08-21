@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import { BtnCounterComponent } from "../../components/btn-counter/btn-counter.component";
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
+import { Rating } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [ButtonComponent, CommonModule, BtnCounterComponent],
+  imports: [ButtonComponent, CommonModule, BtnCounterComponent, Rating, FormsModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
