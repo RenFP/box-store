@@ -1,0 +1,62 @@
+<div class="admin-page">
+    <h3>Produtos Cadastrados</h3>    
+
+    <div class="card">
+    <p-table
+        #dt1
+        [value]="products"
+        [globalFilterFields]="['title', 'category', 'price', 'description']"
+        selectionMode="single"
+        [(selection)]="selectedProducts"
+        dataKey="id"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rows]="10"
+        [paginator]="true"
+    >
+        <ng-template #caption>
+            <p-iconfield iconPosition="left">
+                <p-inputicon>
+                    <i class="pi pi-search"></i>
+                </p-inputicon>
+                <input #filter
+                    pInputText
+                    type="text"
+                    (input)="dt1.filterGlobal(filter.value, 'contains')"
+                    placeholder="Global Search"
+                />
+            </p-iconfield>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th pSortableColumn="title" style="width:40%">Name <p-sortIcon field="title" /></th>
+                <th pSortableColumn="price" style="width:20%">Price <p-sortIcon field="price" /></th>
+                <th pSortableColumn="category" style="width:20%">Category <p-sortIcon field="category" /></th>
+                <th pSortableColumn="rating.rate" style="width:20%">Rating <p-sortIcon field="rating.rate" /></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr [pSelectableRow]="product">
+                <td>
+                    {{ product.title }}
+                </td>
+                <td>
+                    {{ product.price | currency:'USD' }}
+                </td>
+                <td>
+                    {{ product.category | titlecase }}
+                </td>
+                <td>
+                    <i class="pi pi-star-fill" style="color: var(--yellow-500)"></i> {{ product.rating.rate }}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template emptymessage>
+            <tr>
+                <td colspan="4">No customers found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+</div>

@@ -6,6 +6,7 @@ import { ButtonComponent } from "../../components/button/button.component";
 import { CommonModule } from '@angular/common';
 import { BtnCounterComponent } from "../../components/btn-counter/btn-counter.component";
 import { CartService } from '../../services/cart.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +18,7 @@ export class ProductDetailComponent {
   private productService = inject(ProductService);
   private activatedRoute = inject(ActivatedRoute);
   private cartService = inject(CartService);
+  private authService = inject(AuthService)
 
   private productId: number | null = null;
   product: Product  = {} as Product;
@@ -27,9 +29,12 @@ export class ProductDetailComponent {
   }
 
   addToCart(product: Product): void {
-    if(product){
+    if(product && this.authService.isLoggedIn()){
       this.cartService.addToCart(product);
       console.log(this.cartService.getItems());
+    } else {
+
+      console.log('Usuario precisa estar logado!')
     }
   }
  

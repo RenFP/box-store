@@ -21,25 +21,11 @@
         </div>
         <div class="order-container">
             <h3>Resumo do Pedido</h3>
-            <div class="order-summary">
-                <div class="sumamary-content">
-                    <p>Sub Total</p>
-                    <p>Frete/p>
-                </div>
-                <div class="sumamary-values">
-                    <p>{{totalOrder | currency: 'BRL'}}
-                    <p>
-                    <p>2 | currency</p>
-                </div>
-            </div>
-
-            <hr class="hr-cart">
-
             <div class="total-order">
                 <h3>Total</h3>
                 <p>{{totalOrder | currency: 'BRL'}}</p>
             </div>
-            <button>Finalizar Pedido</button>
+            <button class="btn-order">Finalizar Pedido <i class="pi pi-arrow-right" style="font-size: 1.2rem"></i></button>
         </div>
     </div>
 

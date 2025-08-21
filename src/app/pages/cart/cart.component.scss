@@ -45,19 +45,20 @@
 
 }
 
-.hr-cart {
-    border: 0.1px solid #c9c9c9;    
-    width: 95%
-}
-
-.order-summary{
+.total-order{
     display: flex;
     justify-content: space-between;
-    
-    
-
 }
 
+.btn-order{
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 25px;
+    padding: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
 
 @media (max-width: 768px) {
     .cart-content{
