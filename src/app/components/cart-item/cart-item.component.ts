@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BtnCounterComponent } from "../btn-counter/btn-counter.component";
-import { Product } from '../../interfaces/product';
 import { CurrencyPipe } from '@angular/common';
+import { ProductCart } from '../../interfaces/product-cart';
 
 
 @Component({
@@ -11,6 +11,10 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './cart-item.component.scss'
 })
 export class CartItemComponent {
-  @Input() productItem: Product = {} as Product;
+  @Input() productItem: ProductCart = {} as ProductCart;
   @Output() onDeletItem = new EventEmitter<Event>()
+  @Output() onIncrementItem = new EventEmitter<Event>()
+  @Output() onDecrementItem = new EventEmitter<Event>()
+
+
 }

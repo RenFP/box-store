@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CartItemComponent } from "../../components/cart-item/cart-item.component";
 import { CartService } from '../../services/cart.service';
-import { Product } from '../../interfaces/product';
 import { CurrencyPipe } from '@angular/common';
+import { ProductCart } from '../../interfaces/product-cart';
 
 
 @Component({
@@ -13,22 +13,30 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class CartComponent {
   private cartService = inject(CartService);
-  products: Product[] = [] as Product[]
+  cartItems: ProductCart[] = [] as ProductCart[]
   totalOrder: number = 0;
 
 
   ngOnInit() {
-    this.products = this.cartService.getItems();
+    this.cartItems = this.cartService.getItems();
     this.totalOrder = this.cartService.getTotalPrice();
-    console.log(this.products);
+    console.log(this.cartItems);
     
   }
 
   deleteItem(productId: number): void {
-    this.cartService.clearItem(productId);
-    console.log('Produto deletado')
+  
   }
 
+  incrementItem(productId: number){
+    this.cartService.incrementQuantity(productId);
+    this.totalOrder = this.cartService.getTotalPrice();
+  }
 
+  decrementItem(productId: number){
+    this.cartService.decrementQuantity(productId);
+    this.totalOrder = this.cartService.getTotalPrice();
+  }
+  
 
 }

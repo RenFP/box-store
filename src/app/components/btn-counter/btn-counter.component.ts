@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Output, Input, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-btn-counter',
@@ -7,15 +7,7 @@ import { Component, signal, WritableSignal } from '@angular/core';
   styleUrl: './btn-counter.component.scss'
 })
 export class BtnCounterComponent {
-  counter: WritableSignal<number> = signal(0);
-
-  increment() {
-    this.counter.update(value => value + 1);
-  }
-
-  decrement() {
-    if(this.counter() > 0) {
-    this.counter.update(value => value - 1);
-    }
-  }
+  @Input() quantity: number = 0;
+  @Output() increment = new EventEmitter<number>();
+  @Output() decrement = new EventEmitter<number>();
 }

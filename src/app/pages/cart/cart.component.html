@@ -6,9 +6,13 @@
 
     <div class="cart-content">
         <div class="cart-list">
-            @for(product of products; track product.id) {
+            @for(item of cartItems; track item.product.id) {
 
-            <app-cart-item (onDeletItem)="deleteItem(product.id)" [productItem]="product"></app-cart-item>
+            <app-cart-item 
+            (onIncrementItem)="incrementItem(item.product.id)" 
+            (onDecrementItem)="decrementItem(item.product.id)"
+            (onDeletItem)="deleteItem(item.product.id)" 
+            [productItem]="item"></app-cart-item>
 
             @if(!$last) {
             <hr class="hr-cart">

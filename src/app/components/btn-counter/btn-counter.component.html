@@ -1,5 +1,5 @@
 <div class="btn-counter">
-    <button (click)="decrement()">-</button>
-    <div>{{counter()}}</div>
-    <button (click)="increment()">+</button>
+    <button (click)="decrement.emit()">-</button>
+    <div>{{quantity}}</div>
+    <button (click)="increment.emit()">+</button>
 </div>
