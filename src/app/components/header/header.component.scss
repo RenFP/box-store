@@ -9,6 +9,7 @@ p-menubar {
     .logo-box {
         object-fit: contain;
         height: 100%;
+        filter: drop-shadow(0.5px 0.5px 0.5px #ffffff);
     }
 }
 

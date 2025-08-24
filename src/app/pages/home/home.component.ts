@@ -1,6 +1,7 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "../../components/header/header.component";
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,5 @@ import { HeaderComponent } from "../../components/header/header.component";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
-
-
+  cartService = inject(CartService)
 }

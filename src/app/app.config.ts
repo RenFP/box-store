@@ -12,17 +12,23 @@ import Aura from '@primeng/themes/aura';
 
 
 
-const defaultColors = {  
-    200: '#000000', 
-    500: '#272727ff',  
-};
-const myColorPage = {
-  ...Aura,
-  semantic: {
-    ...Aura.semantic,
-    primary: defaultColors,
-  }
-};
+const MyPreset = definePreset(Aura, {
+    semantic: {
+        primary: {
+            50: '{gray.50}',
+            100: '{gray.100}',
+            200: '{gray.200}',
+            300: '{gray.300}',
+            400: '{gray.400}',
+            500: '{gray.500}',
+            600: '{gray.600}',
+            700: '{gray.700}',
+            800: '{gray.800}',
+            900: '{gray.900}',
+            950: '{gray.950}'
+        }
+    }
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,7 +37,10 @@ export const appConfig: ApplicationConfig = {
 
     providePrimeNG({
       theme: {
-        preset: defaultColors,
+        preset: MyPreset,
+        options: {
+            darkModeSelector: '.my-app-dark'
+        }
 
       },
       ripple: true

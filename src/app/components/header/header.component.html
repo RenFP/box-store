@@ -15,17 +15,19 @@
             </a>
         </ng-template>
 
-        <ng-template #end>
+        <ng-template #end>            
             <div class="avatar-user">
+                <p-toggleswitch  (click)="toggleDarkMode()" [(ngModel)]="checked" />
                 <span> {{currentUser | titlecase}} </span>
                 <div class="card flex justify-center">
                     <p-menu #menu [model]="userActions" [popup]="true" />
                     <p-button (click)="menu.toggle($event)" icon="pi pi pi-user" [outlined]="true" />
                 </div>
                 <div>
-                    <p-button [routerLink]="['/home/cart']" badge="{{cartService.totalItems()}}" styleClass="m-0" [outlined]="true">
-                        <i class="pi pi-shopping-cart"></i>
-                    </p-button>
+                    <p-button [routerLink]="['/home/cart']" badge="{{counter}}" styleClass="m-0"
+                    [outlined]="true">
+                    <i class="pi pi-shopping-cart"></i>
+                </p-button>
                 </div>
             </div>
         </ng-template>

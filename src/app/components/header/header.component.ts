@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
@@ -10,6 +10,8 @@ import { Menubar } from "primeng/menubar";
 import { Menu } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { ToggleSwitch } from 'primeng/toggleswitch';
+import { FormsModule } from '@angular/forms';
 
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
@@ -17,7 +19,8 @@ import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, BadgeModule, AvatarModule, InputTextModule, CommonModule, Ripple, Menubar, Menu, ButtonModule],
+  imports: [RouterLink, BadgeModule, AvatarModule, InputTextModule, CommonModule, Ripple, Menubar, Menu, ButtonModule, ToggleSwitch, FormsModule],
+  providers: [UserService, AuthService, CartService],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -31,7 +34,8 @@ export class HeaderComponent {
   router = inject(Router);
   currentUser: any = null;
   userLogged: boolean = false;
-
+  checked: boolean = false;
+  @Input() counter = 0
 
   constructor() {
     this.currentUser = this.userService.getCurrentUser();
@@ -94,6 +98,12 @@ export class HeaderComponent {
     }
   }
 
+
+  toggleDarkMode() {
+    const element = document.querySelector('html');
+    element?.classList.toggle('my-app-dark');
+
+  }
 
   reloadPage() {
     window.location.reload();
