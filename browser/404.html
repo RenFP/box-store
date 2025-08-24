@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecionando...</title>
+    <script>
+      // Pega o caminho da URL atual
+      const path = window.location.pathname;
+
+      // Pega o nome do repositório a partir do primeiro segmento do caminho
+      // Ex: /box-store/products -> repoName = box-store
+      const repoName = path.split('/')[1];
+
+      // Redireciona para o index.html, passando o caminho original
+      // para que o roteador do Angular possa processá-lo.
+      window.location.replace(
+        '/' + repoName + '/?redirect=' + path.slice(1)
+      );
+    </script>
+  </head>
+  <body>
+    Se você não for redirecionado automaticamente, <a href="/box-store/">clique aqui</a>.
+  </body>
+</html>
