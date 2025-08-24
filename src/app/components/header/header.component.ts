@@ -1,12 +1,114 @@
-import { Component } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
+import { AvatarModule } from 'primeng/avatar';
+import { InputTextModule } from 'primeng/inputtext';
+import { CommonModule } from '@angular/common';
+import { Ripple } from 'primeng/ripple';
+import { Menubar } from "primeng/menubar";
+import { Menu } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
+
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, BadgeModule, AvatarModule, InputTextModule, CommonModule, Ripple, Menubar, Menu, ButtonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  items: MenuItem[] | undefined;
+  userActions: MenuItem[] | undefined;
+  userService = inject(UserService)
+  authService = inject(AuthService)
+  cartService = inject(CartService)
+  router = inject(Router);
+  currentUser: any = null;
+
+  constructor() {
+    this.currentUser = this.userService.getCurrentUser();
+  }
+
+  ngOnInit() {
+
+
+    this.items = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        command: () => {
+          this.router.navigate(['/home']);
+        }
+      },
+      {
+        label: 'Administração',
+
+        visible: this.userService.isAdmin(),
+        icon: 'pi pi-home',
+        command: () => {
+          this.router.navigate(['/home/admin']);
+        }
+      },
+      {
+        label: 'Categoria',
+        icon: 'pi pi-search',
+        badge: '3',
+        items: [
+          {
+            label: 'Core',
+            icon: 'pi pi-bolt',
+          },
+          {
+            label: 'Blocks',
+            icon: 'pi pi-server',
+          },
+          {
+            separator: true,
+          },
+          {
+            label: 'UI Kit',
+            icon: 'pi pi-pencil',
+          },
+        ],
+      },
+    ];
+
+    if (this.authService.isLoggedIn()) {
+      this.userActions = [
+        {
+          label: 'Ações',
+          items: [
+            {
+              label: 'Sair',
+              icon: 'pi pi-sign-out',
+              routerLink: ['/home'],
+              command: () => {
+                this.authService.logOut()
+              },
+            }
+          ]
+        }
+      ];
+
+    } else {
+      this.userActions = [
+        {
+          label: 'Options',
+          items: [
+            {
+              label: 'Logar',
+              icon: 'pi pi-sign-out',
+              routerLink: ['/login']
+            }
+          ]
+        }
+      ];
+    }
+  }
 
 }

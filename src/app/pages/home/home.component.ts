@@ -1,8 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-//Service
-import { ProductService } from "../../services/product.service";
-import { Product } from '../../interfaces/product';
 import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
@@ -12,5 +9,7 @@ import { HeaderComponent } from "../../components/header/header.component";
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+
 
 }

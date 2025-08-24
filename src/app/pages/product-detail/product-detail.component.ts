@@ -10,7 +10,6 @@ import { Rating } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../interfaces/product';
 import { ToastModule } from 'primeng/toast';
-
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -26,10 +25,10 @@ export class ProductDetailComponent {
   private cartService = inject(CartService);
   private authService = inject(AuthService);
   private productId: number | null = null;
-  product: Product  = {} as Product;
+  product: Product = {} as Product;
   productQuantity: number = 1;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
     this.productId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -39,35 +38,35 @@ export class ProductDetailComponent {
       });
     }
   }
-   toastMessage(message: string, severity: string) {
-        this.messageService.add({ severity: `${severity}`, summary: 'Info', detail: `${message}`, life: 2000 });
-    }
+  toastMessage(message: string, severity: string) {
+    this.messageService.add({ severity: `${severity}`, summary: 'Info', detail: `${message}`, life: 2000 });
+  }
 
-  incrementProductQuantity(){
+  incrementProductQuantity() {
     if (this.product) {
       this.productQuantity++;
     }
   }
 
-  decrementProductQuantity(){
-    if(this.product && this.productQuantity > 1) {
-       this.productQuantity--;
+  decrementProductQuantity() {
+    if (this.product && this.productQuantity > 1) {
+      this.productQuantity--;
     }
   }
 
 
- addToCart(): void {
-    if(!this.authService.isLoggedIn()) return this.toastMessage('Usuário precisa estar logado para adicionar ao carrinho!', 'warn');
+  addToCart(): void {
+    if (!this.authService.isLoggedIn()) return this.toastMessage('Usuário precisa estar logado para adicionar ao carrinho!', 'warn');
 
-    const AVAILABLEBUY = this.productQuantity > 0 && this.product;      
-    if(AVAILABLEBUY){
+    const AVAILABLEBUY = this.productQuantity > 0 && this.product;
+    if (AVAILABLEBUY) {
 
-        this.cartService.addToCart(this.product, this.productQuantity)
-        this.toastMessage('Produto adicionado ao carrinho!', 'success')
-        
-      } else {
-        console.log('A quantidade do produto precisa ser maior que 0.');
-      }
-    } 
- 
+      this.cartService.addToCart(this.product, this.productQuantity)
+      this.toastMessage('Produto adicionado ao carrinho!', 'success')
+
+    } else {
+      console.log('A quantidade do produto precisa ser maior que 0.');
+    }
+  }
+
 }

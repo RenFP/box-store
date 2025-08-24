@@ -1,4 +1,4 @@
-import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { computed, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { ProductCart } from '../interfaces/product-cart';
 import { Product } from '../interfaces/product';
 
@@ -7,6 +7,10 @@ import { Product } from '../interfaces/product';
 })
 export class CartService {
   private items: WritableSignal<ProductCart[]> = signal([]);
+
+  public readonly cartItems = this.items.asReadonly();
+  public readonly totalItems = computed(() => this.items().length);
+  public readonly totalPrice = computed(() => this.items().reduce((total, cartItem) => total + cartItem.product.price, 0));
 
 
   getItems(): ProductCart[] {
@@ -27,14 +31,6 @@ export class CartService {
 
   clearItem(productId: number): void {
     this.items.set(this.items().filter(item => item.product.id !== productId));    
-  }
-
-  getTotalPrice(): number {
-    return this.items().reduce((total, cartItem) => total + cartItem.product.price, 0);
-  }
-
-  getItemCount(): number {
-    return this.items().length;
   }
 
   incrementQuantity(productId: number): void {

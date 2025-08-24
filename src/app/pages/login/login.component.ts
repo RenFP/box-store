@@ -2,23 +2,36 @@ import { Component, inject } from '@angular/core';
 import { DividerModule } from 'primeng/divider';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { Checkbox } from 'primeng/checkbox'
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../../interfaces/user';
+import { UserService } from '../../services/user.service';
+
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
+import { RouterLink } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-login',
-  imports: [DividerModule, InputTextModule, FloatLabel, ReactiveFormsModule, ButtonModule, Checkbox],
+  imports: [DividerModule, InputTextModule, FloatLabel, ReactiveFormsModule, ButtonModule, Toast, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
+  providers: [MessageService]
 })
 export class LoginComponent {
-  loginService = inject(AuthService);
+  authService = inject(AuthService);
+  userService = inject(UserService);
   router = inject(Router);
-  remenberMe = false;
+  loginPage: boolean = true;
+  
+
+
+  constructor(private messageService: MessageService) { }
+
 
   loginForm = new FormGroup({
     username: new FormControl(),
@@ -26,53 +39,34 @@ export class LoginComponent {
   })
 
   login() {
-    this.loginService.login(this.loginForm.value).subscribe({
-      next: (response) => {        
-        this.router.navigate(['/home']);
-        if (this.remenberMe) {
-          localStorage.setItem('token', response.token);
-        } else {
-          sessionStorage.setItem('token', response.token);
-        }
-      },
-      error: (error) => {
-        console.error('Login failed', error);
-      }
-    });
+    this.authService.login(this.loginForm.value as User).subscribe({
+      next:(user) => {        
+        this.userService.loadCurrentUser(user)        
+      },      
+      complete: () => this.router.navigate(['/home']),
+      error: (err) => console.log('Login failed: ', err)
+    })
+
   }
-  register() {
-    this.loginService.register(this.loginForm.value).subscribe({
+
+  registerUser() {
+    this.authService.register(this.loginForm.value as User).subscribe({
       next: (response) => {
+        this.toastMsg('Registro realizado!', 'success');
         console.log('Registration successful', response);
-        if (this.remenberMe) {
-          localStorage.setItem('token', response.token);
-        } else {
-          sessionStorage.setItem('token', response.token);
-        }
+        this.switchToRegister()
       },
       error: (error) => {
+        this.toastMsg('Falha ao criar a conta!', 'warn');
         console.error('Registration failed', error);
       }
     });
   }
 
-  getUser() {
-    this.loginService.getUser().subscribe({
-      next: (user) => {
-        console.log('User fetched:', user);
-        localStorage.setItem('user', JSON.stringify(user));
-      },
-      error: (error) => {
-        console.error('Error fetching user:', error);
-      }
-    });
+  switchToRegister() {
+    this.loginPage = !this.loginPage;
   }
-  
-
-  
-  show() {
-    console.log(this.remenberMe)
+  toastMsg(msg: string, severity: string) {
+    this.messageService.add({ severity: `${severity}`, summary: 'Info', detail: `${msg}`, life: 2000 });
   }
-
-
 }

@@ -7,7 +7,7 @@ import { ProductComponent } from './pages/product/product.component';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 import { CartComponent } from './pages/cart/cart.component';
-import { AdminComponent } from './pages/admin/admin.component';
+
 
 export const routes: Routes = [
     {
@@ -16,8 +16,12 @@ export const routes: Routes = [
             { path: 'product', component: ProductComponent },
             { path: 'product/:id', component: ProductDetailComponent },
             { path: 'cart', component: CartComponent, canActivate: [authGuard] },
-            { path: 'admin', component: AdminComponent, canActivate: [adminGuard] },
-            { path: '', redirectTo: 'product', pathMatch: 'full' },  
+            {
+                path: 'admin',
+                loadComponent: () => import('./pages/admin/admin.component').then(c => c.AdminComponent),
+                canActivate: [adminGuard]
+            },
+            { path: '', redirectTo: 'product', pathMatch: 'full' },
 
         ]
     },

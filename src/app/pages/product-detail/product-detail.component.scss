@@ -44,8 +44,6 @@
         height: 90%;
         width: 100%;
         object-fit: contain;
-
-
     }
 
 }
@@ -77,26 +75,38 @@
         height: auto;
         max-width: 90%;
         padding: 0 20px;
-        
+
     }
 }
+
 
 .product-info {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     .product-title {
         font-size: 2rem;
         font-weight: bold;
         margin: 0;
         padding: 0px 2px;
-
     }
 
     .product-description {
-        font-size: 1.2rem;
-        margin: 10px 0;
+        font-size: 0.9rem;
+        margin: 5px 0;
         padding: 0px 2px;
+    }
+
+    .product-price {
+        padding: 0;
+        margin: 0;
+    }
+
+    .product-hr {
+        width: 100%;
+        border: 0.1px solid #dddddd;
+        margin: 20px 0;
     }
 }
 
@@ -111,22 +121,12 @@
         justify-content: space-between;
         gap: 10px;
         height: 60px;
-
-    }
-
-    .btn-buyy {
-        width: 50%;
-        max-width: 250px;
-        background-color: #fff000;
-        border-radius: 23px;
-
     }
 
     .btn-add {
         width: 50%;
         max-width: 250px;
-        border: 2px solid #fff000;
+        background-color: #fff000;
         border-radius: 23px;
-
     }
 }

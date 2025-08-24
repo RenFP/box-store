@@ -1,9 +1,33 @@
-<header class="nav-bar">
-    <div [routerLink]="['/home']" class="nav-logo"><img src="logo.png" alt="Logo box-store"></div>
-    <div class="nav-category">Menu</div>
-    <a [routerLink]="['/home/admin']" class="nav-category">Admin</a>
-    <div class="nav-menu">        
-        <a [routerLink]="['/login']"><i class="pi pi-user" style="font-size: 1.5rem"></i></a>
-        <a [routerLink]="['/home/cart']" class="nav-cart"><i class="pi pi-shopping-cart" style="font-size: 1.5rem"></i> Cart</a>
-    </div>
-</header>
+<div class="card">
+    <p-menubar class="" [model]="items">
+        <ng-template #start>
+            <div [routerLink]="['/home']" class="nav-logo"><img class="logo-box" src="logo.png" alt="Logo box-store">
+            </div>
+        </ng-template>
+        <ng-template #item let-item let-root="root">
+            <a pRipple class="flex items-center p-menubar-item-link">
+                <span>{{ item.label }}</span>
+                <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
+                <span *ngIf="item.shortcut"
+                    class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{
+                    item.shortcut }}</span>
+                <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+            </a>
+        </ng-template>
+
+        <ng-template #end>
+            <div class="avatar-user">
+                <span> {{currentUser | titlecase}} </span>
+                <div class="card flex justify-center">
+                    <p-menu #menu [model]="userActions" [popup]="true" />
+                    <p-button (click)="menu.toggle($event)" icon="pi pi pi-user" [outlined]="true" />
+                </div>
+                <div>
+                    <p-button [routerLink]="['/home/cart']" badge="{{cartService.totalItems()}}" styleClass="m-0" [outlined]="true">
+                        <i class="pi pi-shopping-cart"></i>
+                    </p-button>
+                </div>
+            </div>
+        </ng-template>
+    </p-menubar>
+</div>

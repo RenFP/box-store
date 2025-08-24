@@ -12,31 +12,28 @@ import { ProductCart } from '../../interfaces/product-cart';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  private cartService = inject(CartService);
-  cartItems: ProductCart[] = [] as ProductCart[]
-  totalOrder: number = 0;
+  cartService = inject(CartService);
+  cartItems: ProductCart[] = [] as ProductCart[] 
 
 
   ngOnInit() {
     this.cartItems = this.cartService.getItems();
-    this.totalOrder = this.cartService.getTotalPrice();
+
     console.log(this.cartItems);
-    
+
   }
 
   deleteItem(productId: number): void {
-  
+    this.cartService.clearItem(productId);
   }
 
-  incrementItem(productId: number){
+  incrementItem(productId: number) {
     this.cartService.incrementQuantity(productId);
-    this.totalOrder = this.cartService.getTotalPrice();
   }
 
-  decrementItem(productId: number){
+  decrementItem(productId: number) {
     this.cartService.decrementQuantity(productId);
-    this.totalOrder = this.cartService.getTotalPrice();
   }
-  
+
 
 }

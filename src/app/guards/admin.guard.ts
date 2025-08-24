@@ -11,14 +11,11 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const tokenDecoded: any = userToken ? jwtDecode(userToken) : null;
 
   if (authService.isLoggedIn()) {
-
-
     if (tokenDecoded && tokenDecoded.user === 'johnd') {
       return true;
-
     }
   }
+
   router.navigate(['/login']);
   return false
-
 }

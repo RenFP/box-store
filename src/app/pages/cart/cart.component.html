@@ -6,7 +6,7 @@
 
     <div class="cart-content">
         <div class="cart-list">
-            @for(item of cartItems; track item.product.id) {
+            @for(item of cartService.cartItems(); track item.product.id) {
 
             <app-cart-item 
             (onIncrementItem)="incrementItem(item.product.id)" 
@@ -27,7 +27,7 @@
             <h3>Resumo do Pedido</h3>
             <div class="total-order">
                 <h3>Total</h3>
-                <p>{{totalOrder | currency: 'BRL'}}</p>
+                <p>{{ cartService.totalPrice()| currency: 'BRL'}}</p>
             </div>
             <button class="btn-order">Finalizar Pedido <i class="pi pi-arrow-right" style="font-size: 1.2rem"></i></button>
         </div>
