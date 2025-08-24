@@ -1,19 +1,39 @@
-import { Component } from '@angular/core';
-import { Menubar } from 'primeng/menubar';
+
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { SplitButton } from 'primeng/splitbutton';
 
 @Component({
   selector: 'app-filter',
-  imports: [Menubar],
+  imports: [SplitButton],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
-  filterItems = [
-    {
-      label: 'Categoria', items: [
-          { label: 'Category 1', icon: 'pi pi-fw pi-tag' },
-          { label: 'Category 2', icon: 'pi pi-fw pi-tag' },
-        ]
-      }
-  ];
+  items: MenuItem[] = []
+  @Output() selectedCategory = new EventEmitter<string>();
+  
+
+
+  categories = [
+    "electronics",
+    "jewelery",
+    "men's clothing",
+    "women's clothing"
+  ]
+
+
+  constructor() {
+
+    for (let item of this.categories) {
+      this.items.push({
+        label: item,
+        command: () => {
+          this.selectedCategory.emit(item)
+        }
+      })
+    }
+  }
+
+  
 }

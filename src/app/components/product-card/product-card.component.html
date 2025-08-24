@@ -1,8 +1,16 @@
 <div class="card-container">
     <div class="card-content">
+        @defer {
         <div [routerLink]="['/home/product', productItem.id]" class="img-container">
             <img class="img-product" [src]="productItem.image" [alt]="productItem.title">
         </div>
+        } @placeholder  {
+        <div [routerLink]="['/home/product', productItem.id]" class="img-container">
+            <div class="placeholder-img">
+                <i class="pi pi-image"></i>
+            </div>
+        </div>
+        }
         <div class="product-content">
             <h3 class="card-title">{{productItem.title}}</h3>
         </div>

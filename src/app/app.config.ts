@@ -9,6 +9,19 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 
+const defaultColors = {  
+    200: '#000000', 
+    500: '#272727ff',  
+};
+const myColorPage = {
+    ...Aura,
+    semantic: {
+        ...Aura.semantic,
+        primary: defaultColors,
+    }
+};
+
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([httpInterceptor])),
@@ -16,10 +29,8 @@ export const appConfig: ApplicationConfig = {
 
     providePrimeNG({
       theme: {
-        preset: Aura,
-        options: {
-          darkModeSelector: '.my-app-dark'
-        }
+        preset: myColorPage,
+
       },
       ripple: true
     }),

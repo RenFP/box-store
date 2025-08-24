@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ProductCardComponent } from "../../components/product-card/product-card.component";
 import { FilterComponent } from "../../components/filter/filter.component";
 
@@ -17,12 +17,19 @@ import { AuthService } from '../../services/auth.service';
 export class ProductComponent {
   private productService = inject(ProductService);
 
-  productList = signal<Product[]>([])
+  productList:  Product[] = []
+  filteredList: Product[] = []
+
 
   ngOnInit() {
     this.productService.getProducts().subscribe((data) => {
-      this.productList.set(data);
-      console.log(this.productList())
-    });  
+      this.productList = data;
+      this.filteredList = data;      
+    });
   }
+
+  onSelectedCategory(category: string) {
+    this.filteredList = this.productList.filter(product => product.category === category)
+  }
+
 }

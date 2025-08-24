@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
@@ -22,6 +22,7 @@ import { CartService } from '../../services/cart.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  @Output() selectedCategory = new EventEmitter<string>();
   items: MenuItem[] | undefined;
   userActions: MenuItem[] | undefined;
   userService = inject(UserService)
@@ -29,13 +30,16 @@ export class HeaderComponent {
   cartService = inject(CartService)
   router = inject(Router);
   currentUser: any = null;
+  userLogged: boolean = false;
+
 
   constructor() {
     this.currentUser = this.userService.getCurrentUser();
+    this.userLogged = this.authService.isLoggedIn()
   }
 
-  ngOnInit() {
 
+  ngOnInit() {
 
     this.items = [
       {
@@ -54,31 +58,9 @@ export class HeaderComponent {
           this.router.navigate(['/home/admin']);
         }
       },
-      {
-        label: 'Categoria',
-        icon: 'pi pi-search',
-        badge: '3',
-        items: [
-          {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-          },
-          {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-          },
-          {
-            separator: true,
-          },
-          {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-          },
-        ],
-      },
     ];
 
-    if (this.authService.isLoggedIn()) {
+    if (this.userLogged) {
       this.userActions = [
         {
           label: 'Ações',
@@ -89,6 +71,7 @@ export class HeaderComponent {
               routerLink: ['/home'],
               command: () => {
                 this.authService.logOut()
+                this.reloadPage()
               },
             }
           ]
@@ -110,5 +93,11 @@ export class HeaderComponent {
       ];
     }
   }
+
+
+  reloadPage() {
+    window.location.reload();
+  }
+
 
 }

@@ -1,6 +1,7 @@
+<p-toast />
+<p-confirmdialog />
 <div class="cart-page">
     <div class="title-cart">
-
         <h1 class="title-page">Seu Carrinho</h1>
     </div>
 
@@ -29,7 +30,7 @@
                 <h3>Total</h3>
                 <p>{{ cartService.totalPrice()| currency: 'BRL'}}</p>
             </div>
-            <button class="btn-order">Finalizar Pedido <i class="pi pi-arrow-right" style="font-size: 1.2rem"></i></button>
+            <button (click)="confirmBuy($event)" class="btn-order">Finalizar Pedido <i class="pi pi-arrow-right" style="font-size: 1.2rem"></i></button>
         </div>
     </div>
 

@@ -1,8 +1,13 @@
-p-menubar {
-    --p-menubar-border-color: none;
-    --p-menubar-border-radios: 0;
+.filter-container {
+    display: flex;    
+    align-items: center;
+    width: 100%;
+    padding: 10px 30px;  
 }
 
-p-menubar-submenu {
-    background-color: azure;
+.p-splitbutton {
+   --p-button-primary-border-color: black;
+   --p-button-primary-border-color-hover: black;
+   --p-button-primary-border-color-focus: black;
+    
 }

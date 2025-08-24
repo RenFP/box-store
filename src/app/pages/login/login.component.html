@@ -2,11 +2,11 @@
 <div class="login-container">
     <div class="left-content">
         <form [formGroup]="loginForm" class="form-login">
-            <img src="logo.png" alt="box-store logo" class="logo" />
+            <img [routerLink]="['/home']" src="logo.png" alt="box-store logo" class="logo" />
             @if(!authService.isLoggedIn()){
 
                 @if(loginPage) {
-                <h1>Bem vindo!</h1>
+                <h1>Bem vindo!</h1>            
 
                 <p-floatlabel>
                     <input pInputText id="over_label" formControlName="username" autocomplete="off" />
@@ -18,6 +18,7 @@
                 </p-floatlabel>
                 <button (click)="login()" class="btn-login">Logar</button>
                 <button (click)="switchToRegister()" class="btn-register">Registra-se</button>
+                
                 } @else if(loginPage) {
                 <h1>Digite seus dados!</h1>
 
@@ -31,6 +32,7 @@
                 </p-floatlabel>
                 <button (click)="registerUser()" class="btn-login">Criar conta</button>
                 <button (click)="switchToRegister()" class="btn-register">Retornar</button>
+                
                 }
 
             }@else{
@@ -43,6 +45,8 @@
 
     </div>
     <div class="right-content">
+        
 
     </div>
 </div>
+
