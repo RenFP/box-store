@@ -39,7 +39,6 @@ export class ModalComponent {
 
   showDialog() {
     this.visible = !this.visible;
-    console.log(this.visible)
   }
 
 
@@ -63,7 +62,6 @@ export class ModalComponent {
       accept: () => {
         this.productService.deleteProduct(this.productData.id).subscribe({
           next: () => {
-            console.log(this.productData)
             this.messageService.add({ severity: 'secondary', summary: 'Deletado', detail: 'Produto deletado com sucesso!' });
             this.closeDialog();
           },

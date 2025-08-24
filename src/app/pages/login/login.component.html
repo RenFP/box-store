@@ -5,39 +5,46 @@
             <img [routerLink]="['/home']" src="logo.png" alt="box-store logo" class="logo" />
             @if(!authService.isLoggedIn()){
 
-                @if(loginPage) {
-                <h1>Bem vindo!</h1>            
+            @if(loginPage) {
+            <h1>Bem vindo!</h1>
 
-                <p-floatlabel>
-                    <input pInputText id="over_label" formControlName="username" autocomplete="off" />
-                    <label for="over_label">Usuário</label>
-                </p-floatlabel>
-                <p-floatlabel>
-                    <input pInputText id="over_label" formControlName="password" type="password" autocomplete="off" />
-                    <label for="over_label">Senha</label>
-                </p-floatlabel>
-                <button (click)="login()" class="btn-login">Logar</button>
-                <button (click)="switchToRegister()" class="btn-register">Registra-se</button>
-                
-                } @else if(loginPage) {
-                <h1>Digite seus dados!</h1>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="username" autocomplete="off" />
+                <label for="over_label">Usuário</label>
+            </p-floatlabel>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="password" type="password" autocomplete="off" />
+                <label for="over_label">Senha</label>
+            </p-floatlabel>
+            <button (click)="login()" class="btn-login">Logar</button>
+            <button (click)="switchToRegister()" class="btn-register">Registra-se</button>
+            <div>
+                <h2>Usuário Admin</h2>
+                <span>Usuário: johnd / Senha: m38rmF$</span>
+                <br>
+                <h2>Usuário Padrão</h2>
+                <span>Usuário: mor_2314 / Senha: 83r5^_ </span>
+            </div>
 
-                <p-floatlabel>
-                    <input pInputText id="over_label" formControlName="username" autocomplete="off" />
-                    <label for="over_label">Usuário</label>
-                </p-floatlabel>
-                <p-floatlabel>
-                    <input pInputText id="over_label" formControlName="password" type="password" autocomplete="off" />
-                    <label for="over_label">Senha</label>
-                </p-floatlabel>
-                <button (click)="registerUser()" class="btn-login">Criar conta</button>
-                <button (click)="switchToRegister()" class="btn-register">Retornar</button>
-                
-                }
+            } @else if(loginPage) {
+            <h1>Digite seus dados!</h1>
+
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="username" autocomplete="off" />
+                <label for="over_label">Usuário</label>
+            </p-floatlabel>
+            <p-floatlabel>
+                <input pInputText id="over_label" formControlName="password" type="password" autocomplete="off" />
+                <label for="over_label">Senha</label>
+            </p-floatlabel>
+            <button (click)="registerUser()" class="btn-login">Criar conta</button>
+            <button (click)="switchToRegister()" class="btn-register">Retornar</button>
+
+            }
 
             }@else{
-                <h1 class="user-logged">Você já está logado!</h1>
-                <button  class="btn-login"><a [routerLink]="'/home'">Ir para produtos</a></button>
+            <h1 class="user-logged">Você já está logado!</h1>
+            <button class="btn-login"><a [routerLink]="'/home'">Ir para produtos</a></button>
 
             }
 
@@ -45,8 +52,9 @@
 
     </div>
     <div class="right-content">
-        
+        <div>
+
+        </div>
 
     </div>
 </div>
-

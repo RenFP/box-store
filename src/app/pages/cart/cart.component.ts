@@ -25,9 +25,6 @@ export class CartComponent {
 
   ngOnInit() {
     this.cartItems = this.cartService.getItems();
-
-    console.log(this.cartItems);
-
   }
 
   deleteItem(productId: number): void {
