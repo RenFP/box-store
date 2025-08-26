@@ -6,6 +6,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     console.warn('Access negado - Usuário precisa estar autenticado');
+    alert('Usuário precisa estar autenticado')
     return false;
   }
 };
