@@ -47,7 +47,7 @@ export class HeaderComponent {
 
     this.items = [
       {
-        label: 'Home',
+        label: 'Produtos',
         icon: 'pi pi-home',
         command: () => {
           this.router.navigate(['/home']);
