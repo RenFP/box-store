@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Product } from '../../interfaces/product';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,22 +23,29 @@ import { MessageService } from 'primeng/api';
 export class ProductDetailComponent {
   private productService = inject(ProductService);
   private activatedRoute = inject(ActivatedRoute);
+  private messageService = inject(MessageService)
   private cartService = inject(CartService);
-  private authService = inject(AuthService);
-  private productId: number | null = null;
-  product: Product = {} as Product;
+  private authService = inject(AuthService);  
+  product: Product | undefined = undefined;
   productQuantity: number = 1;
 
-  constructor(private messageService: MessageService) { }
-
   ngOnInit() {
-    this.productId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    if (this.productId) {
-      this.productService.getProductById(this.productId).subscribe(product => {
-        this.product = product
-      });
-    }
+    this.activatedRoute.paramMap.pipe(
+      switchMap(params => {
+        const productId = params.get('id');
+        if (productId) {
+          this.productQuantity = 1;
+          return this.productService.getProductById(Number(productId));
+        }
+        return of(undefined);
+      })
+    ).subscribe(product => {
+      this.product = product;
+    });
+
   }
+
+
   toastMessage(message: string, severity: string) {
     this.messageService.add({ severity: `${severity}`, summary: 'Info', detail: `${message}`, life: 2000 });
   }
@@ -57,15 +65,16 @@ export class ProductDetailComponent {
 
   addToCart(): void {
     if (!this.authService.isLoggedIn()) return this.toastMessage('Usuário precisa estar logado para adicionar ao carrinho!', 'warn');
+    if (this.product) {     
+      const AVAILABLEBUY = this.productQuantity > 0 && this.product;
+      if (AVAILABLEBUY) {
 
-    const AVAILABLEBUY = this.productQuantity > 0 && this.product;
-    if (AVAILABLEBUY) {
+        this.cartService.addToCart(this.product, this.productQuantity)
+        this.toastMessage('Produto adicionado ao carrinho!', 'success')
 
-      this.cartService.addToCart(this.product, this.productQuantity)
-      this.toastMessage('Produto adicionado ao carrinho!', 'success')
-
-    } else {
-      console.log('A quantidade do produto precisa ser maior que 0.');
+      } else {
+        console.log('A quantidade do produto precisa ser maior que 0.');
+      }
     }
   }
 

@@ -2,12 +2,15 @@
 <p-toast />
 
 @if (product) {
+
 <div class="product-detail-container">
     <div class="left-content">
-        @defer {
+        @defer (when product) {
         <img class="product-image" [src]="product.image" [alt]="product.title">
         }@placeholder {
-            <i class="pi pi-image"></i>
+        <i class="pi pi-image"></i>
+        }@loading {
+        <p>Carregando...</p>
         }
 
     </div>
@@ -15,7 +18,7 @@
         <div class="product-info">
             <h2 class="product-title">{{product.title}}</h2>
             <p class="product-description">{{product.description}}</p>
-            <p-rating *ngIf="product.rating"  [(ngModel)]="product.rating.rate" [readonly]="true"></p-rating>
+            <p-rating *ngIf="product.rating" [(ngModel)]="product.rating.rate" [readonly]="true"></p-rating>
             <hr class="product-hr">
             <h2 class="product-price">{{product.price | currency:'BRL'}}</h2>
             <hr class="product-hr">
