@@ -22,26 +22,31 @@ import { ProductService } from '../../services/product.service';
 })
 export class ModalComponent {
   productService = inject(ProductService);
+  private confirmationService = inject(ConfirmationService)
+  private messageService = inject(MessageService)
   @Input() visible: boolean = false;
   @Output() visibleChange = new EventEmitter<boolean>();
   @Output() productChange = new EventEmitter<void>();
   @Input() productData: Product = {} as Product;
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  // Forms Fields
+  title: string = '';
+  category: string = '';
+  description: string = '';
+  image: string = '';
 
-  value: string = '';
 
+  ngOnInit() {
+    ({ title: this.title, category: this.category, description: this.description, image: this.image } = this.productData)
+  }
 
   closeDialog() {
     this.visibleChange.emit(false);
     this.visible = false;
   }
-
   showDialog() {
     this.visible = !this.visible;
   }
-
-
   confirmDelete(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -81,7 +86,6 @@ export class ModalComponent {
       },
     });
   }
-
   confirmSave(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -100,7 +104,16 @@ export class ModalComponent {
       },
 
       accept: () => {
-        this.productService.updateProduct(this.productData.id, this.productData).subscribe({
+        const newProduct: Product = {
+          id: this.productData.id,
+          price: this.productData.price,
+          rating: this.productData.rating,
+          title: this.title,
+          category: this.category,
+          description: this.description,
+          image: this.image
+        }
+        this.productService.updateProduct(newProduct).subscribe({
           next: () => {
             this.messageService.add({ severity: 'success', summary: 'Salvo', detail: 'Produto salvo com sucesso!' });
             this.closeDialog();

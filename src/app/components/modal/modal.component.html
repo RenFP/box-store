@@ -1,35 +1,42 @@
 <p-toast />
 <p-confirmdialog />
-<div class="card flex justify-center">
+<form class="card flex justify-center" #formCtrl="ngForm">
+
     <p-dialog header="Editar produto" [modal]="true" (onHide)="closeDialog()" [(visible)]="visible"
         [style]="{ width: '25rem' }">
         <p class="">Atualize as informações do Produto.</p>
 
         <div class="input-group">
             <label for="username">Título</label>
-            <input pInputText id="title" aria-describedby="title" [(ngModel)]="productData.title" />            
+            <input pInputText id="title" aria-describedby="title" name="title" #nameCtrl="ngModel" required
+                minlength="3"
+                [(ngModel)]="title" />
+            @if(nameCtrl.hasError('minlength') && nameCtrl.dirty){
+            <span style="color: red">Precisa de no mínimo três caracteres</span>
+            }
         </div>
         <div class="input-group">
             <label for="username">Categoria</label>
-            <input pInputText id="category" aria-describedby="category" [(ngModel)]="productData.category" />
+            <input pInputText id="category" aria-describedby="category" name="category" required
+                [(ngModel)]="category" />
         </div>
         <div class="input-group">
             <label for="username">Descrição</label>
-            <input pInputText id="description" aria-describedby="description" [(ngModel)]="productData.description" />
+            <input pInputText id="description" name="description" aria-describedby="description" required
+                [(ngModel)]="description" />
         </div>
         <div class="input-group">
             <label for="username">Url Imagem</label>
-            <input pInputText id="urlImage" aria-describedby="urlImage" [(ngModel)]="productData.image" />
+            <input pInputText id="urlImage" name="imgUrl" aria-describedby="urlImage" required [(ngModel)]="image" />
         </div>
-
 
         <div class="btn-container">
             <!-- <p-button label="Deletar" severity="danger" (click)="closeDialog()" />
             <p-button label="Cancelar" severity="secondary" (click)="closeDialog()" />
             <p-button label="Salvar" (click)="closeDialog()" /> -->
 
-            <p-button (click)="confirmDelete($event)" label="Deletar"  severity="danger" />
-            <p-button (click)="confirmSave($event)" label="Salvar" severity="success"/>
+            <p-button (click)="confirmDelete($event)" label="Deletar" severity="danger" />
+            <p-button [disabled]="formCtrl.invalid" (click)="confirmSave($event)" label="Salvar" severity="success" />
         </div>
     </p-dialog>
-</div>
+</form>

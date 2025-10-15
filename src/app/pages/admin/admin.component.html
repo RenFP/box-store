@@ -48,7 +48,8 @@
             </ng-template>
         </p-table>
     </div>
-    
-    <app-modal [productData]="selectedProduct" [visible]="visible" (visibleChange)="closeDialog($event)"></app-modal>
+    @if(visible) {
+        <app-modal [productData]="selectedProduct" [visible]="visible" (visibleChange)="closeDialog($event)"></app-modal>
+    }
 
 </div>

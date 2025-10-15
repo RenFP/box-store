@@ -13,8 +13,8 @@ export class ProductService {
     return this.http.get<Product[]>('https://fakestoreapi.com/products');
   }
 
-  updateProduct(productId: number, product: Product): Observable<Product> {
-    return this.http.put<Product>(`https://fakestoreapi.com/products/${productId}`, product);
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(`https://fakestoreapi.com/products/${product.id}`, product);
   }
 
   getProductById(id: number): Observable<Product> {
